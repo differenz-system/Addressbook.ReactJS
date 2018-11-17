@@ -25,8 +25,6 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 ## Screenshots
 
-**Android Screenshots**
-
 <img src="https://github.com/differenz-system/Addressbook.ReactJS/blob/master/public/screenshots/login.PNG" width="280"> <img src="https://github.com/differenz-system/Addressbook.ReactJS/blob/master/public/screenshots/Create.PNG" width="280"> <img src="https://github.com/differenz-system/Addressbook.ReactJS/blob/master/public/screenshots/List.PNG" width="280"> <img src="https://github.com/differenz-system/Addressbook.ReactJS/blob/master/public/screenshots/Update.PNG" width="280"> 
 
 ## Support
