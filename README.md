@@ -15,7 +15,7 @@ The app does the following:
 2. Clone this sample repository 
 3. Open Terminal, go to location of the repo
 4. Enter command for install dependencies 'npm install' (make sure to go inside project first). It will add required file in the Project.
-5. Enetr command 'npm start' to rund project 
+5. Enter command 'npm start' to rund project 
 
 ## Learn More
 
