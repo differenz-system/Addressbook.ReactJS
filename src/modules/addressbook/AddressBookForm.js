@@ -1,64 +1,91 @@
-import React, { Component } from "react";
-import {connect} from 'react-redux';
-import { Button, Form, FormGroup, Label } from "reactstrap";
+import React, { useState } from "react";
 
-class AddressBookForm extends Component {
-  constructor(props) {
-    super(props);
-    this.count= 1;
-}
-  handleSubmit = (e) => {
+// redux
+import { connect } from 'react-redux';
+
+// UI components
+import { Button, Form, FormGroup, Label, Alert } from "reactstrap";
+
+const AddressBookForm = (props) => {
+
+  const [count, setCount] = useState(1);
+  const [error, setError] = useState("");
+  const [addressData, setAddressData] = useState({ email: '', firstname: '', lastname: '', mobileNo: '' });
+
+  // handle submission of new record
+  const handleSubmit = (e) => {
     e.preventDefault();
-    // let data = this.data;
-    let firstName = this.getFirstName.value;
-    let lastName = this.getLastName.value;
-    let email = this.getEmail.value;
-    let mobileNo = this.getMobileNo.value;
-    let data = {
-      id: this.count++,
-      firstName,
-      lastName,
-      email,
-      mobileNo
+
+    // mobile no validation
+    if (isNaN(addressData.mobileNo) || addressData.mobileNo.length !== 10) {
+      setError('Please enter valid mobile number');
+      setTimeout(() => {
+        setError('');
+      }, 5000);
     }
-    this.props.dispatch({
-      type:'ADD_CONTACT',
-      data});
-    this.getFirstName.value = '';
-    this.getLastName.value = '';
-    this.getEmail.value = '';
-    this.getMobileNo.value = '';
+    else {
+      let firstName = addressData.firstname;
+      let lastName = addressData.lastname;
+      let email = addressData.email;
+      let mobileNo = addressData.mobileNo;
+      let data = {
+        id: count,
+        firstName,
+        lastName,
+        email,
+        mobileNo
+      }
+
+      // add data to redux
+      props.dispatch({
+        type: 'ADD_CONTACT',
+        data
+      });
+      setCount(count + 1)
+
+      // set default values
+      setAddressData({ email: '', firstname: '', lastname: '', mobileNo: '' });
+    }
   }
-  render() {
+
+  // Show alert dialog with error message
+  const alerts = (message) => {
     return (
-      <div>
-        <div>
-        <h1 className="float-left">Address Book</h1>
-        <button className="btn btn-warning float-right"  onClick={()=>{ localStorage.clear();window.location.reload(); }} >Logout</button>
-        </div>
-        <div className="clearfix"></div>
-        <Form onSubmit={this.handleSubmit}>
-          <FormGroup>
-            <Label for="firstName">First Name</Label>
-            <input required type="text" className="form-control" placeholder="Enter Last Name" ref={(input)=>this.getFirstName = input} />
-          </FormGroup>
-          <FormGroup>
-            <Label for="lastName">Last Name</Label>
-            <input required type="text" className="form-control" placeholder="Enter Last Name" ref={(input)=>this.getLastName = input} />
-          </FormGroup>
-          <FormGroup>
-            <Label for="email">Email</Label>
-            <input required type="email" className="form-control" placeholder="Enter Email Address" ref={(input)=>this.getEmail = input} />
-          </FormGroup>
-          <FormGroup>
-            <Label for="mobileNo">Mobile No</Label>
-            <input required type="text" maxLength="10"  className="form-control" placeholder="Enter Mobile No" ref={(input)=>this.getMobileNo = input} />
-          </FormGroup>
-          <Button color="primary">Save</Button>
-        </Form>
-      </div>
+      <Alert color="danger">
+        {message}
+      </Alert>
     );
   }
+
+  return (
+    <div>
+      <div>
+        <h1 className="float-left">Address Book</h1>
+        <button className="btn btn-warning float-right" onClick={() => { props.dispatch({ type: 'LOGOUT' }); }} >Logout</button>
+      </div>
+      {error ? alerts(error) : ""}
+      <div className="clearfix"></div>
+      <Form onSubmit={handleSubmit}>
+        <FormGroup>
+          <Label for="firstName">First Name</Label>
+          <input required type="text" className="form-control" value={addressData.firstname} name="firstname" placeholder="Enter First Name" onChange={(e) => setAddressData({ ...addressData, firstname: e.target.value })} />
+        </FormGroup>
+        <FormGroup>
+          <Label for="lastName">Last Name</Label>
+          <input required type="text" className="form-control" value={addressData.lastname} name="lastname" placeholder="Enter Last Name" onChange={(e) => setAddressData({ ...addressData, lastname: e.target.value })} />
+        </FormGroup>
+        <FormGroup>
+          <Label for="email">Email</Label>
+          <input required type="email" className="form-control" value={addressData.email} name="email" placeholder="Enter Email Address" onChange={(e) => setAddressData({ ...addressData, email: e.target.value })} />
+        </FormGroup>
+        <FormGroup>
+          <Label for="mobileNo">Mobile No</Label>
+          <input required type="text" maxLength="10" className="form-control" value={addressData.mobileNo} name="mobileNo" placeholder="Enter Mobile No" onChange={(e) => setAddressData({ ...addressData, mobileNo: e.target.value })} />
+        </FormGroup>
+        <Button color="primary">Save</Button>
+      </Form>
+    </div>
+  )
 }
 
 export default connect()(AddressBookForm);

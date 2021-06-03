@@ -11,12 +11,13 @@ import addressBookReducer from "./reducers/addressBookReducer";
 // eslint-disable-next-line
 const store = createStore(addressBookReducer);
 
-ReactDOM.render(
+const app = (
   <Provider store={store}>
     <App />
-  </Provider>,
-  document.getElementById("root")
+  </Provider>
 );
+
+ReactDOM.render(app, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
