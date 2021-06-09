@@ -18,7 +18,7 @@ const Contact = (props) => {
     e.preventDefault();
     // mobile no validation
     if (isNaN(addressData.mobileNo) || addressData.mobileNo.length !== 10) {
-      props.setError('Please enter valid mobile number');
+      props.setError('Please enter valid mobile number.');
       setTimeout(() => {
         props.setError('');
       }, 5000);

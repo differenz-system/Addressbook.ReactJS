@@ -18,7 +18,7 @@ const AddressBookForm = (props) => {
 
     // mobile no validation
     if (isNaN(addressData.mobileNo) || addressData.mobileNo.length !== 10) {
-      setError('Please enter valid mobile number');
+      setError('Please enter valid mobile number.');
       setTimeout(() => {
         setError('');
       }, 5000);
