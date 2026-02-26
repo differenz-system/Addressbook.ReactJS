@@ -3,25 +3,6 @@ import storage from "redux-persist/lib/storage";
 import contactsReducer from "../pages/contacts/slice/ContactSlice";
 import authReducer from "../pages/login/Slice/authSlice";
 
-// Clear old localStorage keys that might conflict
-try {
-  const oldContactsKey = "contacts";
-  const oldAuthKeys = ["isAuthenticated", "user", "registeredUsers"];
-  
-  // Check if old format exists (direct keys without persist:)
-  if (localStorage.getItem(oldContactsKey) && !localStorage.getItem("persist:contacts")) {
-    localStorage.removeItem(oldContactsKey);
-  }
-  
-  oldAuthKeys.forEach(key => {
-    if (localStorage.getItem(key) && !localStorage.getItem("persist:auth")) {
-      localStorage.removeItem(key);
-    }
-  });
-} catch (error) {
-  console.error("Error clearing old localStorage:", error);
-}
-
 // Persist config for contacts
 const contactsPersistConfig = {
   key: "contacts",

@@ -21,7 +21,7 @@ Tech stack
 
 Project structure
 
-.
+```.
 ├── src/
 │ ├── components/ # Reusable UI components (tables, modals, loaders)
 │ ├── layout/ # App layout (Header, Footer, layout wrapper)
@@ -38,6 +38,7 @@ Project structure
 ├── package.json
 ├── tailwind.config.js
 └── README.md # <- you are here
+```
 
 Key features
 
