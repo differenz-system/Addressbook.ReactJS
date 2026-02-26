@@ -93,25 +93,3 @@ Create an optimized production build:
 ```bash
 npm run build
 ```
-
-Preview production build locally:
-
-```bash
-npm run preview
-```
-
-Notes & assumptions
-
-- This repository is a frontend reference implementation; it expects either a mock API or a backend that exposes the necessary endpoints for authentication and contacts CRUD. Check `src/services/` to see how API requests are wired and adapt base URLs or auth headers as needed.
-- Authentication in this project is handled client-side with helper modules and persisted store; for production you should pair it with a secure server-side session or token strategy.
-
-Suggested next steps / improvements
-
-- Add integration tests (Jest/React Testing Library) for critical flows (login, create contact, delete/rollback).
-- Extract form validation into shared schemas and add unit tests for validation rules.
-- Add E2E tests (Cypress or Playwright) for the full user flows.
-- Add TypeScript for stricter typing and improved DX.
-
-License
-
-MIT
