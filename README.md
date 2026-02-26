@@ -115,11 +115,3 @@ Suggested next steps / improvements
 License
 
 MIT
-
-If you want, I can also:
-
-- add a short CONTRIBUTING.md
-- create a minimal set of unit tests
-- wire an example mock-server for quick local testing
-
-Tell me which of those you'd like next.
